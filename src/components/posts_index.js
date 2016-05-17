@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { fetchPosts } from '../actions/index';
+import ThreeRender from './three_render';
 import { Link } from 'react-router';
 
 class PostsIndex extends Component {
@@ -17,13 +18,14 @@ class PostsIndex extends Component {
             <strong>{post.title}</strong>
           </Link>
           </li>
-      );
+        );
     });
   }
 
   render() {
     return (
       <div>
+        <ThreeRender />
         <div className="text-xs-right">
           <Link to="/posts/new" className="btn btn-primary">
             Add a Post
@@ -34,12 +36,16 @@ class PostsIndex extends Component {
           {this.renderPosts()}
         </ul>
       </div>
-    );
+      );
   }
 }
 
 function mapStateToProps(state) {
-  return { posts: state.posts.all };
+  return {
+    posts: state.posts.all
+  };
 }
 
-export default connect(mapStateToProps, { fetchPosts })(PostsIndex);
+export default connect(mapStateToProps, {
+  fetchPosts
+})(PostsIndex);
